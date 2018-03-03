@@ -54,3 +54,6 @@
 2. `docker save blandmesser/recipe-api -o recipe-api.tar`
 3. upload tar to server: `scp recipe-api.tar user@server:recipe-api.tar`
 4. load tar: `docker load -i recipe-api.tar`
+5. start docker: `docker run --rm -dp 7000:7000 blandmesser/recipe-api` 
+oder: `docker run --rm -dp 7000:7000 —-name babette/recipe-api blandmesser/recipe-api`  
+bei Änderungen: `docker stop babette/recipe-api`

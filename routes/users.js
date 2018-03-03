@@ -36,7 +36,7 @@ router.post('/update-password', function (req, res) {
 
                connection.query('UPDATE users SET password="'+ hashNew.digest('hex') +'" WHERE id="' + id + '"', function (error, results, fields) {
                   if(error || results.length === 0){
-                     res.status(401).json({message: "no such user found"});
+                     res.send({"status": 500, "error": error, "response": null});
                   } else {
                      res.send({"status": 200, "error": null, "response": results});
                   }

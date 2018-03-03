@@ -21,7 +21,7 @@ router.post('/', function (req, res) {
 
       connection.query('SELECT * from users WHERE username="' + name + '"', function (error, results, fields) {
          if(error || results.length === 0){
-            res.status(401).json({message: "no such user found"});
+            res.send({"status": 500, "error": error, "response": "no such user found"});
          } else {
             const hash = crypto.createHmac('sha512', CONFIG.hash);
             hash.update(password);
@@ -31,12 +31,12 @@ router.post('/', function (req, res) {
                const token = jwt.sign(payload, jwtOptions.secretOrKey);
                res.json({message: "ok", token: token});
             } else {
-               res.status(401).json({message: 'passwords did not match'});
+               res.send({"status": 400, "response": 'passwords did not match'});
             }
          }
       });
    } else {
-      res.status(401).json({message: 'enter data to login'});
+      res.send({"status": 401, "error": null, "response": "enter data to login"});
    }
 });
 

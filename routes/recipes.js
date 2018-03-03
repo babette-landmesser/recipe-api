@@ -32,7 +32,7 @@ passport.use(strategy);
 router.get('/', passport.authenticate('jwt', {session: false}), function (req, res, next) {
    connection.query('SELECT * from recipes', function (error, results, fields) {
       if (error) {
-         res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
+         res.send({"status": 500, "error": error, "response": null});
          //If there is error, we send the error in the error section with 500 status
       } else {
          res.send({"status": 200, "error": null, "response": results});
@@ -91,7 +91,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), function (req, 
          });
       } else {
          const message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
-         res.send(JSON.stringify({"status": 400, "error": error, "response": {message: message}}));
+         res.send(JSON.stringify({"status": 400, "error": null, "response": {message: message}}));
       }
    }
 });
