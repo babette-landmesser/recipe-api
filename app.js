@@ -16,6 +16,7 @@ require('./config/config');
 var index = require('./routes/index');
 var recipes = require('./routes/recipes');
 var login = require('./routes/login');
+var users = require('./routes/users');
 
 var passport = require("passport");
 
@@ -51,8 +52,8 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/api/v1/recipes', recipes);
-app.use('/api/v1/recipes', recipes);
 app.use('/api/v1/login', login);
+app.use('/api/v1/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

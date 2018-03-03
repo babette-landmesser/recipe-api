@@ -44,6 +44,12 @@ router.get('/', passport.authenticate('jwt', {session: false}), function (req, r
 
 /* GET recipes listing. */
 router.post('/', passport.authenticate('jwt', {session: false}), function (req, res, next) {
+
+   if (!req.body.title || !req.body.ingredients || !req.body.preparation || !req.body.portion) {
+      res.send({"status": 500, "error": null, "response": {message: 'incomplete request'}});
+      return;
+   }
+
    const title = req.body.title,
        ingredients = req.body.ingredients,
        preparation = req.body.preparation,

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
+var crypto = require('crypto');
 require('../config/config');
 
 var passportJWT = require("passport-jwt");
@@ -22,7 +23,9 @@ router.post('/', function (req, res) {
          if(error || results.length === 0){
             res.status(401).json({message: "no such user found"});
          } else {
-            if (results.length === 1 && results[0].password === password) {
+            const hash = crypto.createHmac('sha512', CONFIG.hash);
+            hash.update(password);
+            if (results.length === 1 && results[0].password === hash.digest('hex')) {
                const user = results[0];
                const payload = {id: user.id};
                const token = jwt.sign(payload, jwtOptions.secretOrKey);

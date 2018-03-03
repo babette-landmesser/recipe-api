@@ -14,3 +14,5 @@ CONFIG.db_password  = process.env.DB_PASSWORD   || 'root';
 
 CONFIG.jwt_encryption  = process.env.JWT_ENCRYPTION || 'bestCoderOnEarth';
 CONFIG.jwt_expiration  = process.env.JWT_EXPIRATION || '10000';
+
+CONFIG.hash = process.env.HASH || 'ad0ericasdea';
