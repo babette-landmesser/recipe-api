@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
+var http = require('http'),
+    busboy = require("then-busboy"),
+    fileUpload = require('express-fileupload');
 
 require('./config/config');
 
@@ -31,6 +34,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Fileupload
+app.use(fileUpload());
+
 // Database connection
 app.use(function (req, res, next) {
    global.connection = mysql.createConnection({
@@ -45,10 +51,8 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/api/v1/recipes', recipes);
-// app.use('/api/v1/users', recipes);
+app.use('/api/v1/recipes', recipes);
 app.use('/api/v1/login', login);
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
