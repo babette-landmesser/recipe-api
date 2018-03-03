@@ -1,14 +1,11 @@
 FROM node
 MAINTAINER Babette Landmesser <mail@babettelandmesser.de>
-# ENV DEBIAN_FRONTEND noninteractive
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Install Node
-ENV PATH $PATH:/usr/bin/node
-
-# Install Dependencies
-RUN npm cache clean -f
-RUN npm install -g n
-RUN n stable
+EXPOSE 7000
+ADD ./* /home/node/app/
+WORKDIR /home/node/app/
+ENV NODE_ENV production
 RUN npm install
+CMD ["npm start"]
 

@@ -47,3 +47,10 @@
     passwordConfirm: string,
 }
 ```
+
+
+# Deliver Docker Image 
+1. `docker build -t blandmesser/recipe-api .`
+2. `docker save blandmesser/recipe-api -o recipe-api.tar`
+3. upload tar to server: `scp recipe-api.tar user@server:recipe-api.tar`
+4. load tar: `docker load -i recipe-api.tar`
