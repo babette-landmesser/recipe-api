@@ -2,7 +2,7 @@
 ## Pre-requisites
 ### Local database
 - database name: recipe-api
-- import database from sql file: recipe-api.sql
+- import database from sql file: recipe-api_latest.sql. The username for login is `samsampleman` and the password is `admin`
  
 ## Installation
 1. clone repository
@@ -54,6 +54,5 @@
 2. `docker save blandmesser/recipe-api -o recipe-api.tar`
 3. upload tar to server: `scp recipe-api.tar user@server:recipe-api.tar`
 4. load tar: `docker load -i recipe-api.tar`
-5. start docker: `docker run --rm -dp 7000:7000 blandmesser/recipe-api` 
-oder: `docker run --rm -dp 7000:7000 —-name babette/recipe-api blandmesser/recipe-api`  
-bei Änderungen: `docker stop babette/recipe-api`
+5. start docker: `docker run --rm -dp 7000:7000 --name babette/recipe-api blandmesser/recipe-api`  
+6. before changing the container run: `docker stop babette/recipe-api`
